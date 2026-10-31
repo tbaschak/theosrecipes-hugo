@@ -1,10 +1,9 @@
 {{ define "main" }}
-{{- $rss := cond (eq site.Language.Lang "de") "feed.de-DE.xml" "feed.en-US.xml" -}}
 <div class="section prose">
   <h1>{{ i18n "feed.displayPageTitle" }}</h1>
   <p>{{ i18n "feed.introduction" }}</p>
   <div class="feed-links">
-    <p><strong>RSS:</strong> <a href="{{ printf "/rss/%s" $rss | relURL }}"><code>{{ site.BaseURL }}rss/{{ $rss }}</code></a></p>
+    <p><strong>RSS:</strong> <a href="{{ "/index.xml" | relURL }}"><code>{{ site.BaseURL }}index.xml</code></a></p>
   </div>
   <p class="text-sm">{{ i18n "feed.feedtypes" }}</p>
   <h2>{{ i18n "feed.feedreader.sectionTitle" }}</h2>

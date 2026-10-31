@@ -4,14 +4,26 @@
 {{ end }}
 
 {{ define "main" }}
-<article class="recipe" data-default-servings="2">
+{{- $yieldCount := "2" -}}
+{{- $yieldUnit := "" -}}
+{{- with .Params.recipeYield -}}
+  {{- $yieldNumber := findRE "^[0-9]+(\\.[0-9]+)?" . -}}
+  {{- if $yieldNumber -}}
+    {{- $yieldCount = index $yieldNumber 0 -}}
+    {{- $yieldUnit = trim (replaceRE "^[0-9]+(\\.[0-9]+)?" "" .) " " -}}
+  {{- end -}}
+{{- end -}}
+<article class="recipe" data-default-servings="{{ $yieldCount }}">
   <header class="recipe__header">
     <h1 class="recipe__title">{{ .Title }}</h1>
     <div class="recipe__meta">
       <span class="recipe__time">
         {{- partial "icon.html" (dict "id" "clock" "size" 20) -}}
-        {{ .Params.cookTime }}min
+        {{- with .Params.cookTimeRange -}}{{ . }}{{- else -}}{{ i18n "preparationTime.inMinutes" (dict "minutes" $.Params.cookTime) }}{{- end -}}
       </span>
+      {{- with .Params.prepTime }}
+        <span class="recipe__time">Prep: {{ i18n "preparationTime.inMinutes" (dict "minutes" .) }}</span>
+      {{- end }}
       {{ partial "icon-diet.html" (dict "diet" .Params.diet "size" 22) }}
     </div>
   </header>
@@ -22,14 +34,23 @@
     </div>
 
     <div class="recipe__side">
-      <div class="servings" id="servings-control">
-        <h2 class="servings__label">{{ i18n "recipe.servings" }}</h2>
-        <div class="servings__controls">
-          <button type="button" class="servings__btn" id="servings-minus" aria-label="{{ i18n "recipe.servings_less" }}">−</button>
-          <span class="servings__value" id="servings-value">2</span>
-          <button type="button" class="servings__btn" id="servings-plus" aria-label="{{ i18n "recipe.servings_more" }}">+</button>
+      {{- $scalable := false -}}
+      {{- range .Params.ingredients -}}{{- if .scales -}}{{- $scalable = true -}}{{- end -}}{{- end -}}
+      {{- if $scalable }}
+        <div class="servings" id="servings-control">
+          <h2 class="servings__label">{{ if .Params.recipeYield }}{{ i18n "recipe.yield" }}{{ else }}{{ i18n "recipe.servings" }}{{ end }}</h2>
+          <div class="servings__controls">
+            <button type="button" class="servings__btn" id="servings-minus" aria-label="{{ i18n "recipe.servings_less" }}">−</button>
+            <span class="servings__value" id="servings-value">{{ $yieldCount }}</span>
+            <button type="button" class="servings__btn" id="servings-plus" aria-label="{{ i18n "recipe.servings_more" }}">+</button>
+          </div>
+          {{- with $yieldUnit }}<span class="servings__unit">{{ . }}</span>{{ end }}
         </div>
-      </div>
+      {{- else }}
+        {{- with .Params.recipeYield }}
+          <p class="recipe__yield"><strong>{{ i18n "recipe.yield" }}:</strong> {{ . }}</p>
+        {{- end }}
+      {{- end }}
 
       <ul class="ingredients">
         {{- range .Params.ingredients -}}

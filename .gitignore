@@ -5,7 +5,7 @@
 npm-debug.log*
 .env*.local
 
-# Hugo output (regenerate with `hugo --minify --gc`)
+# Hugo output (regenerate with `hugo --minify --gc --cleanDestinationDir`)
 /public/
 
 # Legacy

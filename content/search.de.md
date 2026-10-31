@@ -1,4 +1,0 @@
----
-title: "Suche"
-type: search
----

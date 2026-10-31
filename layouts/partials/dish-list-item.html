@@ -6,7 +6,7 @@
     <div>
       <h3 class="dish-list__title">{{ .Title }}</h3>
       <div class="dish-list__row">
-        <span>{{ i18n "preparationTime.inMinutes" (dict "minutes" .Params.cookTime) }}</span>
+        <span>{{ with .Params.cookTimeRange }}{{ . }}{{ else }}{{ i18n "preparationTime.inMinutes" (dict "minutes" $.Params.cookTime) }}{{ end }}</span>
         {{- partial "icon-diet.html" (dict "diet" .Params.diet "size" 18) -}}
       </div>
     </div>

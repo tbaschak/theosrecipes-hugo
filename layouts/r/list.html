@@ -24,6 +24,18 @@
           <span>{{ i18n "diet.meat" }}</span>
         </button>
       </fieldset>
+      {{- $categories := slice -}}
+      {{- range $pub -}}{{- range .Params.categories -}}{{- $categories = $categories | append . -}}{{- end -}}{{- end -}}
+      {{- $categories = sort (uniq $categories) -}}
+      {{- if gt (len $categories) 0 }}
+        <fieldset class="filter-chips" role="group" aria-label="{{ i18n "filters.category.label" }}">
+          <legend class="visually-hidden">{{ i18n "filters.category.label" }}</legend>
+          <button type="button" class="filter-chip is-active" data-filter-category="all" aria-pressed="true">{{ i18n "filters.category.all" }}</button>
+          {{- range $categories }}
+            <button type="button" class="filter-chip" data-filter-category="{{ . | urlize }}" aria-pressed="false">{{ . }}</button>
+          {{- end }}
+        </fieldset>
+      {{- end }}
       <fieldset class="filter-chips" role="group" aria-label="{{ i18n "filters.cooktime.label" }}">
         <legend class="visually-hidden">{{ i18n "filters.cooktime.label" }}</legend>
         <button type="button" class="filter-chip is-active" data-filter-cooktime="all" aria-pressed="true">{{ i18n "filters.cooktime.any" }}</button>
@@ -51,8 +63,11 @@
     {{- range $p := sort $pub "Date" "desc" -}}
       {{- $title := $p.Title -}}
       {{- $date  := $p.Date.Format "2006-01-02T15:04:05Z07:00" -}}
+      {{- $categorySlugs := slice -}}
+      {{- range $p.Params.categories -}}{{- $categorySlugs = $categorySlugs | append (urlize .) -}}{{- end -}}
       <li class="dish-list__item"
           data-diet="{{ $p.Params.diet }}"
+          data-categories="{{ delimit $categorySlugs "|" }}"
           data-cooktime="{{ $p.Params.cookTime }}"
           data-date="{{ $date }}"
           data-title="{{ lower $title }}">
@@ -63,7 +78,7 @@
           <div>
             <h3 class="dish-list__title">{{ $title }}</h3>
             <div class="dish-list__row">
-              <span>{{ i18n "preparationTime.inMinutes" (dict "minutes" $p.Params.cookTime) }}</span>
+              <span>{{ with $p.Params.cookTimeRange }}{{ . }}{{ else }}{{ i18n "preparationTime.inMinutes" (dict "minutes" $p.Params.cookTime) }}{{ end }}</span>
               {{- partial "icon-diet.html" (dict "diet" $p.Params.diet "size" 18) -}}
             </div>
           </div>

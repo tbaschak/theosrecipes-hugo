@@ -1,6 +1,6 @@
-# [NoNonsense.cooking](https://nononsense.cooking)
+# [Theos Recipes](https://nononsense.cooking)
 
-NoNonsenseCooking is a static site for curated recipes, built with [Hugo](https://gohugo.io/). It keeps pages fast and free of the usual recipe-site bloat.
+Theos Recipes is a static site for curated recipes, built with [Hugo](https://gohugo.io/). It keeps pages fast and free of the usual recipe-site bloat.
 
 ## Why?
 
@@ -22,17 +22,18 @@ Open the URL Hugo prints (usually `http://localhost:1313/`).
 
 Recipes are page bundles under `content/r/<slug>/`:
 
-- `index.en.md` — English (with matching `index.de.md` for German)
-- Shared `translationKey` in front matter (typically the folder name)
+- `index.en.md` — English recipe content
 - Optional image file beside the markdown (e.g. `my-dish.jpg` referenced as `image: my-dish.jpg`)
 
 Use `hugo new content/r/<slug>/index.en.md` and edit the front matter; see an existing bundle for the full shape (`ingredients` in front matter, numbered steps in the markdown body).
+
+The site is English-only and publishes these pages at root URL paths.
 
 If the image is not in the bundle, place a **3:2** image under `static/img/recipes/` and reference its filename in `image`.
 
 ## “Most popular” recipes (Plausible)
 
-Homepage ordering can use `data/popular.yaml` (`en` / `de` lists of **recipe folder slugs**).
+Homepage ordering can use `data/popular.yaml` (`en` list of **recipe folder slugs**).
 
 Refresh from your self-hosted Plausible instance:
 
@@ -42,12 +43,12 @@ export PLAUSIBLE_API_KEY=...
 ./scripts/fetch-popular.sh
 ```
 
-This writes `data/popular.yaml` and runs `hugo --minify --gc`.
+This writes `data/popular.yaml` and runs `hugo --minify --gc --cleanDestinationDir`.
 
 ## Production build
 
 ```bash
-hugo --minify --gc
+hugo --minify --gc --cleanDestinationDir
 ```
 
 Output is in `public/`.

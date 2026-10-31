@@ -1,4 +1,4 @@
-/* NoNonsenseCooking — plain CSS (light / dark) */
+/* Theos Recipes — plain CSS (light / dark) */
 :root {
   color-scheme: light dark;
   --brand: rgb(86, 134, 245);
@@ -189,14 +189,6 @@ a:hover {
 }
 .site-nav__link:hover {
   color: var(--text);
-}
-
-.lang-switch {
-  display: flex;
-  gap: 0.75rem;
-}
-.lang-switch__link {
-  font-size: 0.9rem;
 }
 
 /* Search */
@@ -605,6 +597,11 @@ a:hover {
   text-align: center;
 }
 
+.servings__unit {
+  margin-left: 0.35rem;
+  color: var(--text-muted);
+}
+
 @media (min-width: 1024px) {
   .recipe__intro {
     display: grid;
@@ -675,6 +672,30 @@ a:hover {
   padding: 0;
 }
 
+.recipe-process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.recipe-process__item {
+  margin: 0;
+}
+
+.recipe-process__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.recipe-process__item figcaption {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
 .prose h1 {
   font-size: 1.75rem;
 }
@@ -707,6 +728,15 @@ code {
 
 .section--about {
   margin-top: 3rem;
+}
+
+.about__portrait {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 50%;
+  float: right;
+  margin: 0 0 1rem 1.5rem;
 }
 
 /* Reduced motion: drop the card hover zoom. */
@@ -747,7 +777,6 @@ code {
   .servings,
   .dish-list__empty,
   .search-form,
-  .lang-switch,
   [data-recipe-empty] {
     display: none !important;
   }

@@ -12,7 +12,7 @@
   <div class="dish-card__meta">
     <h3 class="dish-card__title">{{ $page.Title }}</h3>
     <div class="dish-card__row">
-      <span class="dish-card__time">{{ i18n "preparationTime.inMinutes" (dict "minutes" $page.Params.cookTime) }}</span>
+      <span class="dish-card__time">{{ with $page.Params.cookTimeRange }}{{ . }}{{ else }}{{ i18n "preparationTime.inMinutes" (dict "minutes" $page.Params.cookTime) }}{{ end }}</span>
       {{- partial "icon-diet.html" (dict "diet" $page.Params.diet "size" 20) -}}
     </div>
   </div>

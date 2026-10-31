@@ -4,26 +4,33 @@ title: "Legal & Privacy"
 
 ## Legal information
 
-**Owner**  
-Pascal Riesinger
+Theos Recipes is an independent recipe website maintained by **Theo Baschak**. For corrections or questions about the site, use the project’s [GitHub issue tracker](https://github.com/tbaschak/theosrecipes-hugo/issues).
 
-**eMail**  
-pascal@nononsense.cooking
+### Copyright and reuse
 
-Please contact me via eMail for more information.
+Unless a page says otherwise, recipes and recipe photographs are shared under the [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/). You may share and adapt this material under that license’s terms, including giving appropriate credit and indicating changes. The complete license is available in [`LICENSE-recipes`](https://github.com/tbaschak/theosrecipes-hugo/blob/main/LICENSE-recipes).
+
+The website’s source code is separate from its recipes and photographs and is made available under the [MIT License](https://opensource.org/license/mit/); see [`LICENSE-code`](https://github.com/tbaschak/theosrecipes-hugo/blob/main/LICENSE-code).
+
+Recipe information is provided for general use. Ingredients, equipment, and results can vary; use your judgment about food safety, allergies, and dietary needs.
 
 ## Privacy policy
 
-The following explain what data we collect when you use this site.
-
-NoNonsenseCooking was created because many recipe sites are overloaded with trackers and ads. We minimize data collection without hindering the site. We do not collect information that identifies you as a person—only statistical data that makes some features possible (for example “most popular recipes”).
+This policy explains what information may be handled when you visit Theos Recipes. The site is a static recipe website. It has no visitor accounts, comment system, contact form, or advertising, and it does not use analytics to track visits.
 
 ### Hosting
 
-This website is served as static files from infrastructure we control (a VPS). No third-party page host processes your requests beyond what is needed to deliver these files.
+The site is hosted with Cloudflare Pages. To deliver and protect the site, Cloudflare may process technical information associated with requests, such as IP address, requested page or file, and browser and network information. Cloudflare describes its handling of this information in its [Privacy Policy](https://www.cloudflare.com/privacypolicy/). We do not control Cloudflare’s infrastructure or retention practices.
 
-### Plausible Analytics
+### Search
 
-On this site, we use a self-hosted instance of Plausible Analytics. Plausible is a web analytics tool; unlike many analytics products, it is not used to track you across the internet. We only collect usage data on this site and cannot identify you as a person from it. Usage data is stored on a server in Germany.
+Recipe search runs in your browser using a search index downloaded from this site. If you submit a search, the terms appear in the requested URL and are sent through the hosting provider with that page request. Search terms are not saved by the site in an account or profile.
 
-When you visit, we may collect: the URL you visit, the referrer header, your browser, your operating system, your device type (desktop/phone/tablet), and the country you visit from. Read more in [Plausible’s data policy](https://plausible.io/data-policy).
+### Cookies and local storage
+
+The site’s pages and scripts do not set cookies or store information in browser local storage. Cloudflare may use technical measures as part of delivering or protecting its services; see Cloudflare’s privacy information linked above for its practices.
+
+### Information you choose to share
+
+This site does not provide a form for submitting personal information. If you contact the maintainer through GitHub, the information you provide is handled by GitHub under its own privacy policy. Links to other external sites are also subject to those sites’ privacy practices.
+

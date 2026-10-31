@@ -4,7 +4,7 @@ FROM ghcr.io/gohugoio/hugo:v0.169.0 AS builder
 USER root
 WORKDIR /src
 COPY . .
-RUN hugo --minify --gc
+RUN hugo --minify --gc --cleanDestinationDir
 
 FROM caddy:2-alpine
 COPY --from=builder /src/public /site

@@ -1,4 +1,5 @@
 {{- $diet := .diet -}}
+{{- if $diet -}}
 {{- $size := default 24 .size -}}
 {{- $title := i18n (printf "diet.%s" $diet) -}}
 {{- $known := dict "meat" true "fish" true "vegan" true "vegetarian" true -}}
@@ -7,3 +8,4 @@
 <span class="icon-diet icon-diet--{{ $diet }}" title="{{ $title }}">
   {{- partial "icon.html" (dict "id" $id "size" $size) -}}
 </span>
+{{- end -}}

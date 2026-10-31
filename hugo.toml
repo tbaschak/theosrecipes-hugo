@@ -1,8 +1,8 @@
-baseURL = 'https://nononsense.cooking/'
+baseURL = 'https://theosrecipes.ca/'
 defaultContentLanguage = 'en'
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 enableRobotsTXT = false
-title = 'NoNonsenseCooking'
+title = 'Theos Recipes'
 disableKinds = ['taxonomy', 'term']
 
 [taxonomies]
@@ -26,8 +26,3 @@ suffixes = ['json']
 label = 'English'
 locale = 'en-US'
 weight = 1
-
-[languages.de]
-label = 'Deutsch'
-locale = 'de-DE'
-weight = 2

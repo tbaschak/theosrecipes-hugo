@@ -23,7 +23,9 @@
     {{- end -}}
     {{- if not $first }},{{ end -}}
     {{- $first = false -}}
-    {"title":{{ $p.Title | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"image":{{ $fallback | jsonify }},"imageSrcset":{{ delimit $set ", " | jsonify }},"imageSizes":{{ $sizes | jsonify }},"cookTime":{{ $p.Params.cookTime }},"diet":{{ $p.Params.diet | jsonify }}}
+    {{- $ingredientNames := slice -}}
+    {{- range $p.Params.ingredients -}}{{- $ingredientNames = $ingredientNames | append .name -}}{{- end -}}
+    {"title":{{ $p.Title | jsonify }},"description":{{ $p.Params.description | jsonify }},"categories":{{ $p.Params.categories | jsonify }},"ingredients":{{ $ingredientNames | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"image":{{ $fallback | jsonify }},"imageSrcset":{{ delimit $set ", " | jsonify }},"imageSizes":{{ $sizes | jsonify }},"cookTime":{{ $p.Params.cookTime }},"diet":{{ $p.Params.diet | jsonify }}}
   {{- end -}}
 {{- end -}}
 ]

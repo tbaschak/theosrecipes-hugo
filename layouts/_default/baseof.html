@@ -9,23 +9,15 @@
   {{- $desc  := i18n "meta.description.main" -}}
   {{- if $isRecipe -}}
     {{- $title = printf "%s – %s" .Title site.Title -}}
-    {{- $desc  = i18n "meta.description.recipe" (dict "name" .Title) -}}
+    {{- $desc  = default (i18n "meta.description.recipe" (dict "name" .Title)) .Params.description -}}
   {{- else if not .IsHome -}}
     {{- $title = printf "%s – %s" .Title site.Title -}}
   {{- end -}}
   <title>{{ $title }}</title>
   <meta name="description" content="{{ $desc }}">
 
-  {{- /* Canonical link + hreflang alternates for every page. */ -}}
+  {{- /* Canonical URL for this page. */ -}}
   <link rel="canonical" href="{{ .Permalink }}">
-  {{- range .AllTranslations -}}
-  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
-  {{- end -}}
-  <link rel="alternate" hreflang="x-default" href="{{ "/" | absLangURL }}">
-
-  {{- /* Map short language tags to full OG locales. */ -}}
-  {{- $localeMap := dict "en" "en_US" "de" "de_DE" -}}
-  {{- $ogLocale := index $localeMap site.Language.Lang | default site.Language.Lang -}}
 
   {{- /* OpenGraph + Twitter Card. */ -}}
   <meta property="og:site_name" content="{{ site.Title }}">
@@ -33,10 +25,7 @@
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:type" content="{{ if $isRecipe }}article{{ else }}website{{ end }}">
-  <meta property="og:locale" content="{{ $ogLocale }}">
-  {{- range .AllTranslations -}}
-  <meta property="og:locale:alternate" content="{{ index $localeMap .Language.Lang | default .Language.Lang }}">
-  {{- end -}}
+  <meta property="og:locale" content="en_US">
   {{- $ogImage := "" -}}
   {{- $ogW := 0 -}}{{- $ogH := 0 -}}
   {{- if and $isRecipe .Params.image -}}
@@ -67,8 +56,6 @@
   <meta name="theme-color" content="#5686f5">
   {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
-  <link rel="preconnect" href="https://plausible.riesinger.dev" crossorigin>
-  <link rel="dns-prefetch" href="https://plausible.riesinger.dev">
   {{- block "head" . }}{{ end -}}
 </head>
 <body>
@@ -88,6 +75,5 @@
     {{- $recipeList := resources.Get "js/recipe-list.js" | minify | fingerprint -}}
     <script src="{{ $recipeList.RelPermalink }}" integrity="{{ $recipeList.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{- end -}}
-  <script defer data-domain="nononsense.cooking" src="https://plausible.riesinger.dev/count.js"></script>
 </body>
 </html>

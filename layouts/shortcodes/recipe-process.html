@@ -1,0 +1,43 @@
+{{- $page := .Page -}}
+{{- with $page.Params.processImages -}}
+  {{- $entries := . -}}
+  {{- $missing := slice -}}
+  {{- range $entries -}}
+    {{- if not ($page.Resources.GetMatch .image) -}}
+      {{- $missing = $missing | append .image -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $missing -}}
+    {{- errorf "recipe %q has missing processImages resources: %s" $page.File.Path (delimit $missing ", ") -}}
+  {{- else -}}
+<div class="recipe-process" aria-label="Process photos">
+  {{- range $entries }}
+    {{- $entry := . -}}
+    {{- with $page.Resources.GetMatch .image }}
+      {{- $img := . -}}
+      {{- $widths := slice 480 720 960 -}}
+      {{- $jpegSet := slice -}}
+      {{- $webpSet := slice -}}
+      {{- $fallback := "" -}}
+      {{- range $widths -}}
+        {{- if le . $img.Width -}}
+          {{- $jpeg := $img.Process (printf "resize %dx q82" .) -}}
+          {{- $webp := $img.Process (printf "resize %dx webp q80" .) -}}
+          {{- $jpegSet = $jpegSet | append (printf "%s %dw" $jpeg.RelPermalink .) -}}
+          {{- $webpSet = $webpSet | append (printf "%s %dw" $webp.RelPermalink .) -}}
+          {{- $fallback = $jpeg.RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not $fallback -}}{{- $fallback = $img.RelPermalink -}}{{- end -}}
+  <figure class="recipe-process__item">
+    <picture>
+      <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" sizes="(min-width: 1024px) 480px, (min-width: 640px) calc((100vw - 5rem) / 2), calc(100vw - 4rem)">
+      <img src="{{ $fallback }}" srcset="{{ delimit $jpegSet ", " }}" sizes="(min-width: 1024px) 480px, (min-width: 640px) calc((100vw - 5rem) / 2), calc(100vw - 4rem)" alt="{{ $entry.alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" decoding="async">
+    </picture>
+    <figcaption>{{ $entry.caption }}</figcaption>
+  </figure>
+    {{- end }}
+  {{- end }}
+</div>
+  {{- end -}}
+{{- end -}}

@@ -30,25 +30,15 @@ last_slug() {
 
 write_filtered() {
   local out="$1"
-  shift
   : >"$out"
-  jq -r '.results[] | .page' "$TMP/body.json" | while read -r page; do
-    local ok=0
-    for needle in "$@"; do
-      if [[ "$page" == *"/${needle}/"* ]]; then
-        ok=1
-        break
-      fi
-    done
-    [[ "$ok" -eq 1 ]] || continue
+  jq -r '.results[] | .page | select(test("^https?://[^/]+/r/"))' "$TMP/body.json" | while read -r page; do
     slug="$(printf '%s' "$page" | last_slug)"
     [[ -n "$slug" ]] && printf '%s\n' "$slug" >>"$out"
   done
   awk '!seen[$0]++' "$out" >"${out}.u" && mv "${out}.u" "$out"
 }
 
-write_filtered "$TMP/en.txt" en en-US
-write_filtered "$TMP/de.txt" de de-DE
+write_filtered "$TMP/en.txt"
 
 mkdir -p data
 {
@@ -59,12 +49,6 @@ mkdir -p data
   else
     echo "en: []"
   fi
-  if [[ -s "$TMP/de.txt" ]]; then
-    echo "de:"
-    sed 's/^/  - /' "$TMP/de.txt"
-  else
-    echo "de: []"
-  fi
 } >data/popular.yaml
 
-hugo --minify --gc
+hugo --minify --gc --cleanDestinationDir

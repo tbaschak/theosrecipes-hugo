@@ -2,7 +2,7 @@
   'use strict';
   var root = document.querySelector('.recipe');
   if (!root) return;
-  var DEFAULT = parseInt(root.getAttribute('data-default-servings') || '2', 10) || 2;
+  var DEFAULT = parseFloat(root.getAttribute('data-default-servings') || '2') || 2;
   var servings = DEFAULT;
   var valueEl = document.getElementById('servings-value');
   var items = root.querySelectorAll('li[data-base-amount]');
@@ -11,6 +11,7 @@
   // Keep this list short and ergonomic — bakers don't use 1/8.
   var FRACTIONS = [
     { v: 0,    s: '' },
+    { v: 1/8,  s: '\u215B' }, // ⅛
     { v: 1/4,  s: '\u00BC' }, // ¼
     { v: 1/3,  s: '\u2153' }, // ⅓
     { v: 1/2,  s: '\u00BD' }, // ½
@@ -18,7 +19,7 @@
     { v: 3/4,  s: '\u00BE' }, // ¾
     { v: 1,    s: '' }
   ];
-  var FRACTION_UNITS = { none: 1, pc: 1, tbsp: 1 };
+  var FRACTION_UNITS = { none: 1, pc: 1, tbsp: 1, tsp: 1, cup: 1 };
 
   function nearestFraction(frac) {
     var best = FRACTIONS[0];

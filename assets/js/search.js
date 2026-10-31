@@ -68,7 +68,7 @@
 
   function fuseOpts() {
     return {
-      keys: ['title'],
+      keys: ['title', 'description', 'categories', 'ingredients'],
       threshold: 0.4,
       distance: 100,
       minMatchCharLength: 2,
@@ -80,14 +80,8 @@
     return (s || '').trim().replace(/[<>]/g, '');
   }
 
-  function langPrefix() {
-    var lang = document.documentElement.lang || 'en';
-    if (lang.indexOf('de') === 0) return 'de';
-    return 'en';
-  }
-
   function searchIndexUrl() {
-    return '/' + langPrefix() + '/search-index.json';
+    return '/search-index.json';
   }
 
   function dietClass(d) {

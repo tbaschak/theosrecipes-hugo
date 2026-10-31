@@ -2,24 +2,8 @@
 	encode zstd gzip
 	root * /site
 
-	@root path /
-	@german header Accept-Language *de*
-	handle @root {
-		redir @german /de/ 302
-		redir /en/ 302
-	}
-
-	@enu path_regexp enu ^/en-US/(.*)$
-	redir @enu /en/{re.enu.1} 301
-
-	@deu path_regexp deu ^/de-DE/(.*)$
-	redir @deu /de/{re.deu.1} 301
-
 	@rssEn path /rss/feed.en-US.xml /rss/feed.en.xml /feed.xml /rss/feed.xml
-	rewrite @rssEn /en/index.xml
-
-	@rssDe path /rss/feed.de-DE.xml /rss/feed.de.xml
-	rewrite @rssDe /de/index.xml
+	rewrite @rssEn /index.xml
 
 	# Fingerprinted CSS / JS (Hugo emits *.min.<hash>.{css,js,mjs}) are
 	# content-addressed and safe to cache forever.
@@ -35,7 +19,7 @@
 	@assets path /img/* /fonts/*
 	header @assets Cache-Control "public, max-age=2592000"
 
-	# Hugo image-pipeline output lives under /<lang>/r/<slug>/<hash>.{jpg,webp}
+	# Hugo image-pipeline output lives under /r/<slug>/<hash>.{jpg,webp}
 	# and the hash makes the URL content-addressed.
 	@processedImages path_regexp images \.(jpg|jpeg|png|webp|avif|svg|ico)$
 	header @processedImages Cache-Control "public, max-age=2592000"

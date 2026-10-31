@@ -5,14 +5,18 @@
 "home.mostpopularrecipes" = "Most Popular"
 "home.latestrecipes"      = "Latest Recipes"
 "home.allrecipes"         = "All Recipes"
-"home.about.sectiontitle" = "What is NoNonsenseCooking?"
-"home.about.introduction" = 'NoNonsenseCooking has been built because many websites hosting recipes are overloaded with ads and useless features and have dozens of recipes per dish. How would you find the "right one"?'
-"home.about.mission"      = "We made it our mission to curate our favorite recipes to be easy to follow and without the extra fluff and then publish them here"
-"home.about.cta"          = 'You want to stay up-to-date? Subscribe to our <a href="/rss/">RSS feed</a> with your favorite reader. You like what we do? Find out how you can support our work <a href="/donate/">here</a>.'
+"home.about.sectiontitle" = "About Theos Recipes"
+"home.about.introduction" = "I'm Theodore Baschak, and welcome to my food blog. I live in Winnipeg, Manitoba, Canada, and learned to cook from my parents, my wife, and cooking shows. My wife has inspired my passion for food and introduced me to many cuisines."
+"home.about.mission"      = "I'm a full-time IT guy trying to cook more often. I develop recipes by learning from other cooks and recipes, then recording what works in my own kitchen. This site shares those recipes without the ads and extra clutter found on many recipe websites."
+"home.about.winnipeg"     = 'For ingredients in Winnipeg, I have had good luck at local Sobeys stores and at <a href="https://www.dinosgrocerymart.com/">Dino’s Grocery Mart</a> on Notre Dame Avenue. Local ethnic grocery stores are also great places to find unfamiliar ingredients and ask for advice.'
+"home.about.authorImageAlt" = "Theodore Baschak"
+"home.about.cta"          = 'Want to stay up to date? Subscribe to our <a href="/rss/">RSS feed</a> with your favorite reader.'
 
 # All-recipes filter toolbar
 "filters.diet.label"     = "Filter by diet"
 "filters.diet.all"       = "All"
+"filters.category.label" = "Filter by category"
+"filters.category.all"   = "All categories"
 "filters.cooktime.label" = "Filter by cooking time"
 "filters.cooktime.any"   = "Any time"
 "filters.cooktime.lte15" = "≤ 15 min"
@@ -33,6 +37,7 @@
 
 # Recipe page
 "recipe.servings"       = "Servings"
+"recipe.yield"          = "Yield"
 "recipe.servings_less"  = "Fewer servings"
 "recipe.servings_more"  = "More servings"
 "preparationTime.inMinutes" = "{{ .minutes }}min"
@@ -45,10 +50,13 @@
 "recipe.suffix.ml"   = "ml"
 "recipe.suffix.l"    = "l"
 "recipe.suffix.tbsp" = "tbsp"
+"recipe.suffix.tsp"  = "tsp"
+"recipe.suffix.cup"  = "cup"
+"recipe.suffix.oz"   = "oz"
 
 # Meta tags
-"meta.description.main"   = "Find simple and delicious recipes on NoNonsenseCooking"
-"meta.description.recipe" = "Cook {{ .name }} with a simple recipe from NoNonsenseCooking"
+"meta.description.main"   = "Find simple and delicious recipes from Theos Recipes"
+"meta.description.recipe" = "Cook {{ .name }} with a simple recipe from Theos Recipes"
 
 # Header / search
 "header.link.allrecipes"     = "All recipes"
@@ -59,7 +67,6 @@
 
 # Footer
 "footer.link.legal.text"  = "Legal information"
-"footer.link.donate.text" = "Donate"
 "footer.link.rss.title"   = "Subscribe via RSS"
 "footer.licensenotice"    = 'The content on this page is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> license'
 
@@ -70,12 +77,6 @@
 "notfound.links.home"       = "Back to the home page"
 "notfound.links.allrecipes" = "All Recipes"
 "notfound.links.github"     = "Submit an issue on GitHub"
-
-# Donate
-"donation.displayPageTitle"        = "Donate ❤️"
-"donation.introduction"            = "NoNonsenseCooking was created because many recipe websites are bloated with ads and trackers and overloaded with dozens of recipes per dish. I'd be thrilled if you want to support publishing curated recipes on an ad-free site!"
-"donation.section.monthly.title"   = "Monthly donations"
-"donation.section.onetime.title"   = "One-time donations"
 
 # Feeds
 "feed.displayPageTitle"          = "Subscribe to our feeds"
